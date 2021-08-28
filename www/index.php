@@ -1,4 +1,20 @@
 <h1>Opa</h1>
 <?php
-echo 1 + 3;
-?>
+$pdo = new PDO('mysql:dbname=meudb;host=db','matheus','password');
+
+$sql = $pdo->query('SELECT * FROM usuarios');
+
+if($sql->rowCount() > 0){
+
+    $usuarios = $sql->fetchAll();
+
+    echo '<ul>';
+    foreach ($usuarios as $usuario) {
+        echo '<li>'.$usuario['nome'].'</li>';
+    }
+
+    echo '</ul>';
+
+} else {
+    echo "Não há usuários cadastrados!";
+}
