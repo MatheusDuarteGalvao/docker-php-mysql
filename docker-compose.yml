@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+    wwww: 
+        build: .
+        restart: allways
+        ports: 
+            - '8000:80'
+        volumes: 
+            - ./wwww:/var/www/html
+        networks: 
+            - default
+    db:
+        image: mysql:5.7
+        restart: allways
+        ports:
+            - '3307:3006'
+        environment: 
+            MYSQL_DATABASE: meudb
+            MYSQL_USER: matheus
+            MYSQL_PASSWORD: password
+            MYSQL_ROOT_PASSWORD: password123
+        volumes: 
+            - db_data:/var/lib/mysql
+        networks: 
+            - default
+volumes:
+    db_data: 
